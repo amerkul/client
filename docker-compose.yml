@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: client:latest
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: "dev"
+    networks:
+      - cloud
+
+networks:
+  cloud:
+    name: network_name
+
+volumes:
+  client:
+    driver: local
