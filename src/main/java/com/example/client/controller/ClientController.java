@@ -21,13 +21,13 @@ public class ClientController {
     private final UserClient client;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/create")
     public CatalogDto create(@RequestBody CatalogDto dto) {
         service.insertItem(dto);
         return dto;
     }
 
-    @GetMapping(value = "/all", produces = "application/json")
+    @GetMapping(value = "/all")
     @ResponseStatus(HttpStatus.OK)
     public List<CatalogDto> getAll() {
         log.debug("Start get all items from catalog method");
@@ -35,12 +35,12 @@ public class ClientController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/user", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/user")
     public User createUser(@RequestBody User user) {
         return client.insertItem(user);
     }
 
-    @GetMapping(value = "/users", produces = "application/json")
+    @GetMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAllUsers() {
         System.out.println("Get all users");
