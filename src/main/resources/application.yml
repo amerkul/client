@@ -1,6 +1,12 @@
 spring:
   application:
     name: client
+  kafka:
+    topic: topic
+    bootstrap-servers: ${KAFKA_HOST}:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonDeserializer
 server:
   port: 8081
 management:
