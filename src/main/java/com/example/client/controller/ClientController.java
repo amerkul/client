@@ -3,7 +3,7 @@ package com.example.client.controller;
 import com.example.client.controller.dto.CatalogDto;
 import com.example.client.controller.dto.User;
 import com.example.client.service.CloudService;
-import com.example.client.service.UserClient;
+import com.example.client.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,13 +17,13 @@ import java.util.List;
 @RequestMapping("/client")
 public class ClientController {
 
-    private final CloudService service;
-    private final UserClient client;
+    private final CloudService cloudService;
+    private final UserService userService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/create")
     public CatalogDto create(@RequestBody CatalogDto dto) {
-        service.insertItem(dto);
+        cloudService.insertItem(dto);
         return dto;
     }
 
@@ -31,20 +31,13 @@ public class ClientController {
     @ResponseStatus(HttpStatus.OK)
     public List<CatalogDto> getAll() {
         log.debug("Start get all items from catalog method");
-        return service.retrieveAll();
+        return cloudService.retrieveAll();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/user")
-    public User createUser(@RequestBody User user) {
-        return client.insertItem(user);
-    }
-
-    @GetMapping(value = "/users")
-    @ResponseStatus(HttpStatus.OK)
-    public List<User> getAllUsers() {
-        System.out.println("Get all users");
-        return client.retrieveAll();
+    public void createUser(@RequestBody User user) {
+        userService.insertItem(user);
     }
 
 }
